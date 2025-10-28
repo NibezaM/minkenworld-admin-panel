@@ -74,7 +74,7 @@ export const SellerEditForm = ({ seller }: SellerEditFormProps) => {
         onSubmit={handleSubmit}
         className="flex flex-1 flex-col overflow-hidden"
       >
-        <RouteDrawer.Body>
+        <RouteDrawer.Body className="overflow-y-auto">
           <div className="flex flex-col gap-y-4">
             <Form.Field
               control={form.control}
