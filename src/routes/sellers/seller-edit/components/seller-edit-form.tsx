@@ -36,13 +36,13 @@ export const SellerEditForm = ({ seller }: SellerEditFormProps) => {
 
   const form = useForm<z.infer<typeof SellerEditSchema>>({
     defaultValues: {
-      name: seller?.name || undefined,
+      name: seller?.name,
       email: seller?.email || "",
       phone: seller?.phone || undefined,
       description: seller?.description || undefined,
       address_line: seller?.address_line || undefined,
       city: seller?.city || undefined,
-      state: seller?.state || undefined,
+      state: seller?.state ?? undefined,
       country_code: seller?.country_code || undefined,
       postal_code: seller?.postal_code || undefined,
       tax_id: seller?.tax_id || undefined,

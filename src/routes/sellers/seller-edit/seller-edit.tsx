@@ -27,7 +27,9 @@ export const SellerEdit = () => {
         <RouteDrawer.Header>
           <RouteDrawer.Title>{t("sellers.edit.header")}</RouteDrawer.Title>
         </RouteDrawer.Header>
+        {data?.seller && (
           <SellerEditForm seller={data?.seller as unknown as VendorSeller} />
+        )}
       </RouteDrawer>
     </>
   );
