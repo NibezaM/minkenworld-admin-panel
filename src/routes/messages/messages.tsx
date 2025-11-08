@@ -5,7 +5,12 @@ import { Container, Heading, Text } from "@medusajs/ui";
 import { Inbox, Session } from "@talkjs/react";
 import Talk from "talkjs";
 
+import { useTalkJS } from "@hooks/api/messages";
+import { Spinner } from "@medusajs/icons";
+
 export const Messages = () => {
+  const { isLoading } = useTalkJS();
+
   const syncUser = useCallback(
     () =>
       new Talk.User({
@@ -15,6 +20,8 @@ export const Messages = () => {
     [],
   );
 
+  const talkJsAppId = __TALK_JS_APP_ID__;
+
   return (
     <Container className="divide-y p-0 min-h-[700px]">
       <div className="flex items-center justify-between px-6 py-4">
@@ -23,8 +30,12 @@ export const Messages = () => {
         </div>
       </div>
       <div className="px-6 py-4 h-[655px]">
-        {__TALK_JS_APP_ID__ ? (
-          <Session appId={__TALK_JS_APP_ID__} syncUser={syncUser}>
+        {isLoading ? (
+          <div className="flex items-center justify-center">
+          <Spinner className="text-ui-fg-interactive animate-spin" />
+        </div>
+        ) : talkJsAppId ? (
+          <Session appId={talkJsAppId} syncUser={syncUser}>
             <Inbox className="h-full" />
           </Session>
         ) : (
