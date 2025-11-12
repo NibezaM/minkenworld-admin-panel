@@ -100,9 +100,12 @@ const CreateCommissionRuleForm = ({ onSuccess }: Props) => {
       setLoading(false);
       toast.success("Created!");
       onSuccess?.();
-    } catch (e: unknown) {
-      toast.error("Error!");
-      console.error(e);
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : "Failed to create commission rule";
+      toast.error(errorMessage);
       setLoading(false);
     }
   };
