@@ -319,7 +319,7 @@ const CreateCommissionRuleForm = ({ onSuccess }: Props) => {
     if (!showProductCategories) {
       form.setValue("category", "");
     }
-  }, [reference, showSellers, showProductTypes, showProductCategories, form]);
+  }, [showSellers, showProductTypes, showProductCategories, form.setValue]);
 
   return (
     <Form {...form}>
