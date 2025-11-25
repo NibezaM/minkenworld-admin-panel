@@ -15,13 +15,13 @@ export const UserMetadata = () => {
   }
 
   return (
-    <RouteDrawer>
+    <div data-testid="user-metadata">
       <MetadataForm
         isPending={isPending}
         isMutating={isMutating}
         hook={mutateAsync}
         metadata={user?.metadata}
       />
-    </RouteDrawer>
+    </div>
   )
 }
