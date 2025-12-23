@@ -31,6 +31,7 @@ const ProductEditVariantSchema = z.object({
   barcode: z.string().optional(),
   manage_inventory: z.boolean(),
   allow_backorder: z.boolean(),
+  one_time_product: z.boolean().optional(),
   weight: optionalInt,
   height: optionalInt,
   width: optionalInt,
@@ -64,6 +65,7 @@ export const ProductEditVariantForm = ({
       barcode: variant.barcode || "",
       manage_inventory: variant.manage_inventory || false,
       allow_backorder: variant.allow_backorder || false,
+      one_time_product: (variant.metadata?.one_time_product as boolean) || false,
       weight: variant.weight || "",
       height: variant.height || "",
       width: variant.width || "",
@@ -90,6 +92,7 @@ export const ProductEditVariantForm = ({
       length,
       allow_backorder,
       manage_inventory,
+      one_time_product,
       options,
       ...optional
     } = data
@@ -107,6 +110,7 @@ export const ProductEditVariantForm = ({
         allow_backorder,
         manage_inventory,
         options,
+        metadata: { ...variant.metadata, one_time_product },
         ...nullableData,
       },
       {
@@ -336,6 +340,39 @@ export const ProductEditVariantForm = ({
                       </Form.Hint>
                     </div>
                     <Form.ErrorMessage data-testid="product-variant-edit-form-allow-backorder-error" />
+                  </Form.Item>
+                )
+              }}
+            />
+            <Form.Field
+              control={form.control}
+              name="one_time_product"
+              render={({ field: { value, onChange, ...field } }) => {
+                return (
+                  <Form.Item data-testid="product-variant-edit-form-one-time-product-item">
+                    <div className="flex flex-col gap-y-1" data-testid="product-variant-edit-form-one-time-product-container">
+                      <div className="flex items-center justify-between" data-testid="product-variant-edit-form-one-time-product-control-row">
+                        <Form.Label data-testid="product-variant-edit-form-one-time-product-label">
+                          One-Time Product
+                        </Form.Label>
+                        <Form.Control data-testid="product-variant-edit-form-one-time-product-control">
+                          <div data-testid="product-variant-edit-form-one-time-product-switch-wrapper">
+                            <Switch
+                              dir="ltr"
+                              className="rtl:rotate-180"
+                              checked={value}
+                              onCheckedChange={(checked) => onChange(!!checked)}
+                              {...field}
+                              data-testid="product-variant-edit-form-one-time-product-switch"
+                            />
+                          </div>
+                        </Form.Control>
+                      </div>
+                      <Form.Hint data-testid="product-variant-edit-form-one-time-product-hint">
+                        Limit this variant to exactly 1 unit in inventory
+                      </Form.Hint>
+                    </div>
+                    <Form.ErrorMessage data-testid="product-variant-edit-form-one-time-product-error" />
                   </Form.Item>
                 )
               }}

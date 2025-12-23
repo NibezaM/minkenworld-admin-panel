@@ -29,6 +29,7 @@ const ProductCreateVariantSchema = z.object({
   manage_inventory: z.boolean().optional(),
   allow_backorder: z.boolean().optional(),
   inventory_kit: z.boolean().optional(),
+  one_time_product: z.boolean().optional(),
   options: z.record(z.string(), z.string()),
   variant_rank: z.number(),
   prices: z.record(z.string(), optionalFloat).optional(),

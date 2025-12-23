@@ -165,6 +165,17 @@ const useColumns = ({
           return <DataGrid.BooleanCell context={context} />
         },
       }),
+      columnHelper.column({
+        id: "one_time_product",
+        name: "One-Time Product",
+        header: "One-Time Product",
+        field: (context) =>
+          `variants.${context.row.original.originalIndex}.one_time_product`,
+        type: "boolean",
+        cell: (context) => {
+          return <DataGrid.BooleanCell context={context} />
+        },
+      }),
 
       columnHelper.column({
         id: "inventory_kit",
